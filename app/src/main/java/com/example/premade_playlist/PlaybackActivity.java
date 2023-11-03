@@ -1,0 +1,173 @@
+package com.example.premade_playlist;
+
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PlaybackActivity extends AppCompatActivity {
+    private SeekBar musicSeekBar;
+    private MediaPlayer mediaPlayer;
+    private Handler handler;
+    private boolean isPlaying = false;
+    private ImageButton playButton, pauseButton, rewindButton, fastForwardButton;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_playback);
+
+        Intent intent = getIntent();
+        String songTitle = intent.getStringExtra("SONG_TITLE");
+        initializeMediaPlayer(songTitle);
+        ImageView songThumbnailImageView = findViewById(R.id.songThumbnail);
+        songThumbnailImageView.setImageResource(R.drawable.shlok);
+
+
+        musicSeekBar = findViewById(R.id.musicSeekBar);
+        musicSeekBar.setMax(mediaPlayer.getDuration());
+
+        playButton = findViewById(R.id.button_Play);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playSong();
+            }
+        });
+
+        pauseButton = findViewById(R.id.button_Pause);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pauseSong();
+            }
+        });
+
+        rewindButton = findViewById(R.id.button_Rewind);
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rewindSong();
+            }
+        });
+
+        fastForwardButton = findViewById(R.id.button_FastForward);
+        fastForwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fastForwardSong();
+            }
+        });
+
+        handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                updateSeekBar();
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.postDelayed(runnable, 1000);
+    }
+
+    private void initializeMediaPlayer(String songTitle) {
+        if (songTitle.equals("Song 1")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.chandachamke);
+        } else if (songTitle.equals("Song 2")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.chandsifarish);
+        } else if (songTitle.equals("Song 3")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 4")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dilmerinasune);
+        } else if (songTitle.equals("Song 5")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.sukhkalale);
+        } else if (songTitle.equals("Song 6")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 7")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 8")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 9")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 10")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.sukhkalale);
+        } else if (songTitle.equals("Song 11")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 12")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 13")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 14")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 15")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 16")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        } else if (songTitle.equals("Song 17")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        }else if (songTitle.equals("Song 18")) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dhagadhaga);
+        }
+    }
+
+
+
+    private void playSong() {
+        if (!isPlaying) {
+            mediaPlayer.start();
+            isPlaying = true;
+            playButton.setEnabled(false);
+            pauseButton.setEnabled(true);
+        }
+    }
+    private void pauseSong() {
+        if (isPlaying) {
+            mediaPlayer.pause();
+            isPlaying = false;
+            playButton.setEnabled(true);
+            pauseButton.setEnabled(false);
+        }
+    }
+    private void rewindSong() {
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        int newPosition = currentPosition - 5000;
+
+        if (newPosition < 0) {
+            newPosition = 0;
+        }
+
+        mediaPlayer.seekTo(newPosition);
+    }
+
+    private void fastForwardSong() {
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        int duration = mediaPlayer.getDuration();
+        int newPosition = currentPosition + 5000;
+
+        if (newPosition > duration) {
+            newPosition = duration;
+        }
+
+        mediaPlayer.seekTo(newPosition);
+    }
+    private void updateSeekBar() {
+        if (mediaPlayer != null && isPlaying) {
+            int currentPosition = mediaPlayer.getCurrentPosition();
+            musicSeekBar.setProgress(currentPosition);
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+    }
+}
