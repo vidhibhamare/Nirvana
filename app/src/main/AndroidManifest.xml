@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Nirvana"
+        tools:targetApi="31">
+        <activity
+            android:name=".homePage"
+            android:exported="false"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/Theme.Nirvana.NoActionBar" />
+        <activity
+            android:name=".Mood"
+            android:exported="false" />
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.premade_playlist.MarathiActivity"/>
+        <activity android:name=".ui.premade_playlist.EnglishActivity"/>
+        <activity android:name=".ui.premade_playlist.GujaratiActivity"/>
+        <activity android:name=".ui.premade_playlist.HindiActivity"/>
+        <activity android:name=".ui.premade_playlist.PlaybackActivity"/>
+        <activity android:name=".ui.premade_playlist.SanskritActivity"/>
+        <activity android:name=".ui.premade_playlist.TamilActivity"/>
+        <activity android:name=".ui.songsearch.PlaybacksearchActivity"/>
+
+    </application>
+
+</manifest>
