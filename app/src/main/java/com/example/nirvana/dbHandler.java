@@ -89,20 +89,9 @@ public class dbHandler extends SQLiteOpenHelper {
         values.put(COLUMN_USERNAME, newUsername);
         values.put(COLUMN_PASSWORD, newPassword);
 
-        String whereClause = COLUMN_USERNAME + "=?";
-        String[] whereArgs = {oldUsername};
-
-        try {
-            int rowsAffected = db.update(TABLE_NAME, values, whereClause, whereArgs);
-            db.close();
-            return rowsAffected;
-        } catch (Exception e) {
-            Log.e("UpdateError", "Error updating credentials: " + e.getMessage());
-            return -1;  // Return a value indicating an error.
-        }
+        int rows = db.update(TABLE_NAME,values,COLUMN_USERNAME+" = '"+oldUsername+"'",null);
+        return rows;
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

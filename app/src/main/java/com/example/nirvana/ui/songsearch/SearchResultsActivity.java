@@ -37,7 +37,8 @@ public class SearchResultsActivity extends Fragment {
         searchView = view.findViewById(R.id.searchView);
         songListView = view.findViewById(R.id.songListView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, songs);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.custom_list_item, songs);
+
         songListView.setAdapter(adapter);
 
         songListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

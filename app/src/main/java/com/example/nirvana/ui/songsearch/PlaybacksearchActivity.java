@@ -29,7 +29,7 @@ public class PlaybacksearchActivity extends AppCompatActivity {
         initializeMediaPlayer(songTitle);
 
         ImageView songThumbnailImageView = findViewById(R.id.songThumbnail);
-        songThumbnailImageView.setImageResource(R.drawable.shlok);
+        songThumbnailImageView.setImageResource(R.drawable.nirvana);
 
         musicSeekBar = findViewById(R.id.musicSeekBar);
         if (mediaPlayer != null) {

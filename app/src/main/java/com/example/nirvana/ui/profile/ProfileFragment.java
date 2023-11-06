@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.nirvana.databinding.FragmentProfileBinding;
 import com.example.nirvana.dbHandler;
+import com.example.nirvana.homePage;
 
 public class ProfileFragment extends Fragment{
     EditText editTextUser, editTextPass, editTextPass2;
@@ -33,13 +34,13 @@ public class ProfileFragment extends Fragment{
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Bundle args = getArguments();
-        if (args != null) {
-            username = args.getString("username");
-        }
+        homePage activity = (homePage) getActivity();
+        username = activity.username;
+
         editTextUser = binding.editTextUser;
         editTextPass = binding.editTextPass;
         editTextPass2 = binding.editTextPass2;
+        editTextUser.setText(username);
 
         update = binding.button2;
         update.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +56,7 @@ public class ProfileFragment extends Fragment{
                     int rowsUpdated = db.updateUserCredentials(username, newUsername, newPassword);
                     if (rowsUpdated > 0) {
                         Toast.makeText(getContext(), "Update Successful!", Toast.LENGTH_SHORT).show();
+
                     } else {
                         Toast.makeText(getContext(), "Update Failed!", Toast.LENGTH_SHORT).show();
                     }

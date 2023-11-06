@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -38,6 +39,10 @@ public class TimerFragment extends Fragment {
         startTimerButton = root.findViewById(R.id.startTimerButton);
         textViewTimer = root.findViewById(R.id.textViewTimer);
 
+        int textColor = getResources().getColor(R.color.white);
+        setNumberPickerTextColor(hoursPicker, textColor);
+        setNumberPickerTextColor(minutesPicker, textColor);
+
         hoursPicker.setValue(0);
         minutesPicker.setValue(0);
         hoursPicker.setMinValue(0);
@@ -45,9 +50,6 @@ public class TimerFragment extends Fragment {
         minutesPicker.setMinValue(0);
         minutesPicker.setMaxValue(59);
 
-        int textColor = getResources().getColor(R.color.white);
-        setNumberPickerTextColor(hoursPicker, textColor);
-        setNumberPickerTextColor(minutesPicker, textColor);
 
         startTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,14 +89,22 @@ public class TimerFragment extends Fragment {
 
     // Function to set the text color for a NumberPicker
     private void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
-        try {
-            @SuppressLint("SoonBlockedPrivateApi") Field selectorWheelPaintField = NumberPicker.class.getDeclaredField("mSelectorWheelPaint");
-            selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (Exception e) {
-            e.printStackTrace();
+        int count = numberPicker.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = numberPicker.getChildAt(i);
+            if (child instanceof EditText) {
+                try {
+                    @SuppressLint("SoonBlockedPrivateApi") Field selectorWheelPaintField = NumberPicker.class.getDeclaredField("mSelectorWheelPaint");
+                    selectorWheelPaintField.setAccessible(true);
+                    ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
+                } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
+
 
     @Override
     public void onDestroyView() {

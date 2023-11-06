@@ -24,7 +24,8 @@ public class homePage extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomepageBinding binding;
     Bundle extras;
-    String username;
+    public String username;
+    public String mood = "indifferent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class homePage extends AppCompatActivity {
 
         extras = getIntent().getExtras();
         username = extras.getString("username");
-
+        mood = extras.getString("mood");
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString("username", username);
