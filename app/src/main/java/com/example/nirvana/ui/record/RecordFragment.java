@@ -78,7 +78,7 @@ public class RecordFragment extends Fragment {
             mediaRecorder.prepare();
             mediaRecorder.start();
             isRecording = true;
-            //Toast.makeText(requireContext(), "RECORDING IS STARTED", Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), "RECORDING IS STARTED", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class RecordFragment extends Fragment {
                 isRecording = false;
             }
         }
-        // Toast.makeText(requireContext(), "RECORDING HAS BEEN STOPPED", Toast.LENGTH_LONG).show();
+        Toast.makeText(requireContext(), "RECORDING HAS BEEN STOPPED", Toast.LENGTH_LONG).show();
     }
 
 

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.nirvana.ui.home.HomeFragment;
+import com.example.nirvana.ui.premade_playlist.PremadeplylistActivity;
 import com.example.nirvana.ui.profile.ProfileFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -25,7 +27,7 @@ public class homePage extends AppCompatActivity {
     private ActivityHomepageBinding binding;
     Bundle extras;
     public String username;
-    public String mood = "indifferent";
+    public String mood = "Indifferent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,22 @@ public class homePage extends AppCompatActivity {
         extras = getIntent().getExtras();
         username = extras.getString("username");
         mood = extras.getString("mood");
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString("username", username);
-        fragment.setArguments(args);
+//        HomeFragment homeFragment = new HomeFragment();
+//        Bundle args = new Bundle();
+//        args.putString("mood", mood); // Pass the mood
+//        homeFragment.setArguments(args);
+
+
+
+
+        if ("spiritual".equalsIgnoreCase(mood)) {
+            PremadeplylistActivity premadePlaylistFragment = new PremadeplylistActivity();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_home_page, premadePlaylistFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
 
         setSupportActionBar(binding.appBarHomePage.toolbar);
 

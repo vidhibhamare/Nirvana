@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
     String song1;
     String song2;
     String song3;
-    String mood = "indifferent";
+    String mood = "Indifferent";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +34,18 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+//        homePage activity = (homePage) getActivity();
+//        if (activity != null) {
+//            mood = activity.mood;
+//        } else {
+//            mood = "indifferent"; // Set a default value or handle this case as needed.
+//        }
         homePage activity = (homePage) getActivity();
-        if (activity != null) {
-            mood = activity.mood;
-        } else {
-            mood = "indifferent"; // Set a default value or handle this case as needed.
-        }
+        mood = activity.mood;
+
+//        if (getArguments() != null && getArguments().containsKey("mood")) {
+//            mood = getArguments().getString("mood");
+//        }
 
         textView8 = binding.textView8;
         textView8.setText(mood);

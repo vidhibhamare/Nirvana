@@ -61,6 +61,7 @@ public class Mood extends AppCompatActivity {
 
     public void spiritual(View view) {
         Intent I = new Intent(this, homePage.class);
+        I.putExtra("mood","spiritual");
         I.putExtra("username",username);
         startActivity(I);
     }

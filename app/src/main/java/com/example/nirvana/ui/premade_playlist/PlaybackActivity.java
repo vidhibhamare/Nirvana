@@ -30,7 +30,7 @@ public class PlaybackActivity extends AppCompatActivity {
         String songTitle = intent.getStringExtra("SONG_TITLE");
         initializeMediaPlayer(songTitle);
         ImageView songThumbnailImageView = findViewById(R.id.songThumbnail);
-        songThumbnailImageView.setImageResource(R.drawable.shlok);
+        songThumbnailImageView.setImageResource(R.drawable.nirvana);
 
 
         musicSeekBar = findViewById(R.id.musicSeekBar);
